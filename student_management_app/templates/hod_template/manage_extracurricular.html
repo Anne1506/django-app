@@ -1,0 +1,34 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Club/Society</th>
+            <th>Achievements</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for activity in extracurriculars %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ activity.student.admin.first_name }} {{ activity.student.admin.last_name }}</td>
+            <td>{{ activity.club_name }}</td>
+            <td>{{ activity.achievements }}</td>
+            <td>
+                {% if activity.status == 0 %} Pending
+                {% elif activity.status == 1 %} Approved
+                {% elif activity.status == 2 %} Rejected
+                {% endif %}
+            </td>
+            <td>
+                {% if activity.status == 0 %}
+                <a href="{% url 'approve_extracurricular' activity.id %}" class="btn btn-success">Approve</a>
+                <a href="{% url 'reject_extracurricular' activity.id %}" class="btn btn-danger">Reject</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
