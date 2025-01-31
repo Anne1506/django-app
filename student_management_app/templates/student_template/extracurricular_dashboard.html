@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">View Clubs</a></li>
+            <li><a href="#">View Events</a></li>
+            <li><a href="#">Achievements</a></li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <h2>Hi, Welcome Back</h2>
+            <a href="#">View Calendar of Events</a>
+        </div>
+        <div class="stats">
+            <div>No. of Clubs You're In: {{ club_count }}</div>
+            <div>Number of Events: {{ event_count }}</div>
+            <div>Next Event Date: {{ next_event_date }}</div>
+        </div>
+        <div class="events">
+            <h3>Upcoming Events</h3>
+            <ul>
+                {% for event in events %}
+                    <li>{{ event.name }} - {{ event.date }}</li>
+                {% empty %}
+                    <li>No upcoming events.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="achievements">
+            <h3>Your Achievements</h3>
+            <ul>
+                {% for achievement in achievements %}
+                    <li>{{ achievement.title }} - {{ achievement.date_awarded }}</li>
+                {% empty %}
+                    <li>No achievements yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
